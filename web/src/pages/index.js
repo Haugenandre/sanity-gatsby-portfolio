@@ -20,7 +20,7 @@ export const query = graphql`
       keywords
     }
     projects: allSanitySampleProject(
-      limit: 6
+      limit: 8
       sort: {fields: [publishedAt], order: DESC}
       filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
     ) {
@@ -57,6 +57,17 @@ export const query = graphql`
         }
       }
     }
+     site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
+      title
+      subtitle
+      description
+      keywords
+    }
+    mainprojects: allSanityMainProjects(
+      limit: 8
+      sort: {fields: [publishedAt], order: DESC}
+      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
+    )
   }
 `
 
